@@ -1,0 +1,13 @@
+{
+  "base_document": {
+    "word_count": 1367,
+    "noun_count": 217,
+    "noun_percentage": 15.874177029992683
+  },
+  "test_document": {
+    "word_count": 1367,
+    "noun_count": 217,
+    "noun_percentage": 15.874177029992683
+  },
+  "Remarks": "Similarity in document is 100 %"
+}
