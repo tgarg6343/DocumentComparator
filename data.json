@@ -5,9 +5,11 @@
     "noun_percentage": 15.874177029992683
   },
   "test_document": {
-    "word_count": 1367,
-    "noun_count": 217,
-    "noun_percentage": 15.874177029992683
+    "word_count": 1535,
+    "noun_count": 208,
+    "noun_percentage": 13.550488599348535
   },
-  "Remarks": "Similarity in document is 100 %"
+  "Remarks": {
+    "DocumentReport": "Similarity in document is 80.58244367811427 %<br>Efficiency with respect to base documment is 108.37890651255157 %"
+  }
 }

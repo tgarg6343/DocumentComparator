@@ -4,7 +4,7 @@ var WordPOS = require('wordpos');
 wordpos = new WordPOS();
 const fs=require('fs');
 
-var report='';
+var reportStatement='';
 
 var wordcountbase=0;
 var nouncountbase=0;
@@ -17,6 +17,7 @@ var nouncounttest=0;
 var nounstest;
 var tokenstest;
 var allTexttest='';
+var efficiency=100.0;
 
 var testing={};
 testing['base_document']={};
@@ -44,7 +45,7 @@ var tokenizingbase=function(file){
 
 var tokenizingtest=function(file){
  return new Promise(function(resolve,reject){
- 	textract.fromFileWithPath(file, function( error, text ) {
+ 	textract.fromFileWithPath('Anish_bootstrap.docx', function( error, text ) {
 	var tokenizer = new natural.WordTokenizer();
 	tokenstest=tokenizer.tokenize(text);
 	allTexttest=text;
@@ -71,23 +72,48 @@ Promise.all([tokenizingbase('bootstrap_documantation.docx'),tokenizingtest('boot
 	// console.log("noun count test is"+nouncounttest);
 
  	if(wordcounttest>=(85*wordcountbase/100)&&wordcounttest<=(115*wordcountbase/100)){
+ 		if(wordcountbase>wordcounttest){
+ 			efficiency-=wordcounttest*100/wordcountbase;
+ 		}
+ 		else
+ 		{
+ 			efficiency+=wordcounttest*100/wordcountbase;
+ 		}
+
  		baseNounPercentage=nouncountbase/wordcountbase*100;
  		testing.base_document['noun_percentage']=baseNounPercentage;
 		testNounPercentage=nouncounttest/wordcounttest*100;
 		testing.test_document['noun_percentage']=testNounPercentage;
  		if(Math.abs(baseNounPercentage-testNounPercentage)<=15){
 
- 			let similarity=natural.JaroWinklerDistance(allTextbase,allTexttest)*100;
- 			report+="Similarity in document is "+similarity+" %";
- 			console.log(testing);
- 			testing['Remarks']=report;
+ 				if(nouncountbase>nouncounttest){
+ 			efficiency-=nouncounttest*100/nouncountbase;
  		}
  		else{
- 			report+="noun percentage is very less";
+ 			efficiency+=nouncounttest*100/nouncountbase;
+
+ 		}
+ 			let similarity=natural.JaroWinklerDistance(allTextbase,allTexttest)*100;
+ 			reportStatement+="Similarity in document is "+similarity+" %"+"<br>";
+
+ 			if(similarity>50){
+ 				efficiency-=similarity/10;
+ 			}
+
+
+
+ 			//console.log(testing);
+ 			reportStatement+="Efficiency with respect to base documment is "+efficiency+" %";
+
+ 			testing['Remarks']={'DocumentReport':reportStatement};
+
+ 		}
+ 		else{
+ 			reportStatement+="noun percentage is very less";
  		}
  	}
  	else{
- 		report+="word count is not in range";
+ 		reportStatement+="word count is not in range";
  	}
  	
  	let json=JSON.stringify(testing,null,2);
