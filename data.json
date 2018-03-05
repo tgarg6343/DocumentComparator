@@ -1,13 +1,15 @@
 {
-     "base_document": {
-          "word_count": 1368,
-          "noun_count": 426,
-          "noun_percentage": 31.140350877192986
-     },
-     "test_document": {
-          "word_count": 1651,
-          "noun_count": 537,
-          "noun_percentage": 32.52574197456087
-     },
-     "Remarks": "Similarity in document is 75.02006783365917 %"
+  "base_document": {
+    "word_count": 1368,
+    "noun_count": 426,
+    "noun_percentage": 31.140350877192986
+  },
+  "test_document": {
+    "word_count": 1651,
+    "noun_count": 537,
+    "noun_percentage": 32.52574197456087
+  },
+  "Remarks": [
+    "Similarity in document is 75.03817804424925 %"
+  ]
 }
